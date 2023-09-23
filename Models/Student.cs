@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyWebApp.Models
 {
@@ -12,7 +13,7 @@ namespace MyWebApp.Models
         [Required(ErrorMessage = "Tên chưa nhập")]
         public string? Name { get; set; }
         //
-        [Required(ErrorMessage = "Email bchưa nhập")]
+        [Required(ErrorMessage = "Email chưa nhập")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@gmail+\.com", 
         ErrorMessage = "Địa chỉ email phải có đuôi gmail.com")]
         public string? Email { get; set; }
@@ -20,6 +21,7 @@ namespace MyWebApp.Models
         [DisplayName("Mật khẩu")]
         [RegularExpression(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[:;<>,/.?~_+-=|\]]).{8,}$"
         , ErrorMessage = "Mật khẩu từ 8 ký tự trở lên, có ký tự viết hoa, viết thường, chữ số và ký tự đặc biệt")]
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Mật khẩu chưa nhập")]
         public string? Password { get; set; }
         //
@@ -42,12 +44,13 @@ namespace MyWebApp.Models
         [Range(typeof(DateTime), "1/1/1963", "12/31/2005", ErrorMessage = "Ngày sinh trong khoảng 1/1/196 đến 31/12/2005")]
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Ngày sinh chưa nhập")]
-        public DateTime DateOfBorth { get; set; }
+        public DateTime? DateOfBorth { get; set; }
         //
         [DisplayName("Điểm")]
-        [Range(0,10)]
+        [Range(0, 10, ErrorMessage = "Điểm phải là số và trong khoảng 1-10")]
         [Required(ErrorMessage = "Điểm chưa nhập")]
         public double? Point { get; set; }
 
     }
+    
 }
