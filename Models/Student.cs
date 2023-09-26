@@ -8,20 +8,20 @@ namespace MyWebApp.Models
     {
         public int Id { get; set; }
         //
-        [DisplayName("Tên")]
+        [DisplayName("Tên")]    
         [StringLength(100, MinimumLength = 4, ErrorMessage = "Tên 4-100 ký tự")]
         [Required(ErrorMessage = "Tên chưa nhập")]
         public string? Name { get; set; }
         //
         [Required(ErrorMessage = "Email chưa nhập")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@gmail+\.com", 
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@gmail\.com", 
         ErrorMessage = "Địa chỉ email phải có đuôi gmail.com")]
         public string? Email { get; set; }
         //
         [DisplayName("Mật khẩu")]
-        [RegularExpression(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[:;<>,/.?~_+-=|\]]).{8,}$"
+        [RegularExpression(@"^(?=.*[0-9].*[a-z].*[A-Z].*[*.!@$%^&(){}[:;<>,/.?~_+-=|\]]).{8,}$"
         , ErrorMessage = "Mật khẩu từ 8 ký tự trở lên, có ký tự viết hoa, viết thường, chữ số và ký tự đặc biệt")]
-        [DataType(DataType.Password)]
+        //[DataType(DataType.Password)]
         [Required(ErrorMessage = "Mật khẩu chưa nhập")]
         public string? Password { get; set; }
         //
@@ -47,9 +47,10 @@ namespace MyWebApp.Models
         public DateTime? DateOfBorth { get; set; }
         //
         [DisplayName("Điểm")]
+        [RegularExpression(@"\d+\.?\d*$", ErrorMessage = "Điểm phải là số thực")]
         [Range(0, 10, ErrorMessage = "Điểm phải là số và trong khoảng 1-10")]
         [Required(ErrorMessage = "Điểm chưa nhập")]
-        public double? Point { get; set; }
+        public double Point { get; set; }
 
     }
     
