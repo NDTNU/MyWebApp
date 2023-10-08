@@ -1,9 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using MyWebApp.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Dang ky SchoolContext la mot DbContext 
+builder.Services.AddDbContext<SchoolContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolContext")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+//Khoi tao du lieu cho database
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    DbInitialize.Initialize(services);
+}   
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
